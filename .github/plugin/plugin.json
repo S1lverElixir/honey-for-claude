@@ -1,16 +1,15 @@
 {
-  "name": "ponytail",
-  "description": "Lazy senior dev mode. Forces the simplest, shortest solution that actually works: YAGNI, stdlib first, no unrequested abstractions.",
-  "version": "4.9.0",
+  "name": "honey",
+  "description": "Honey (I Shrunk the AI). Three reflexive levers that cut agent token cost.",
+  "version": "1.3.1",
   "author": {
-    "name": "Dietrich Gebert",
-    "url": "https://github.com/DietrichGebert"
+    "name": "Green-PT",
+    "url": "https://github.com/Green-PT"
   },
-  "homepage": "https://github.com/DietrichGebert/ponytail",
-  "repository": "https://github.com/DietrichGebert/ponytail",
+  "homepage": "https://github.com/S1lverElixir/ponytail",
+  "repository": "https://github.com/S1lverElixir/ponytail",
   "license": "MIT",
-  "keywords": ["yagni", "minimalism", "code-review", "productivity"],
-  "commands": "commands/",
+  "keywords": ["tokens", "yagni", "minimalism", "productivity"],
   "skills": "skills/",
-  "hooks": "hooks/copilot-hooks.json"
+  "hooks": "hooks/claude-codex-hooks.json"
 }

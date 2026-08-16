@@ -1,20 +1,19 @@
 {
-  "name": "ponytail",
-  "description": "Lazy senior dev mode for AI agents. The best code is the code you never wrote.",
+  "name": "honey",
+  "description": "Honey (I Shrunk the AI). Write less code and say less about it.",
   "owner": {
-    "name": "Dietrich Gebert",
-    "url": "https://github.com/DietrichGebert"
+    "name": "S1lverElixir",
+    "url": "https://github.com/S1lverElixir"
   },
   "plugins": [
     {
-      "name": "ponytail",
-      "description": "Forces the laziest solution that works. YAGNI, stdlib first, one line over fifty.",
+      "name": "honey",
+      "description": "Cuts agent token cost: less code, less prose, denser handoffs.",
       "source": "./",
       "category": "productivity",
-      "tags": ["yagni", "minimalism", "code-review", "productivity"],
-      "commands": "commands/",
+      "tags": ["tokens", "yagni", "minimalism", "productivity"],
       "skills": "skills/",
-      "hooks": "hooks/copilot-hooks.json"
+      "hooks": "hooks/claude-codex-hooks.json"
     }
   ]
 }

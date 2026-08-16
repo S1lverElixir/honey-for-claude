@@ -1,14 +1,14 @@
 {
-  "name": "ponytail",
+  "name": "honey",
   "interface": {
-    "displayName": "Ponytail"
+    "displayName": "Honey"
   },
   "plugins": [
     {
-      "name": "ponytail",
+      "name": "honey",
       "source": {
         "source": "url",
-        "url": "https://github.com/DietrichGebert/ponytail.git",
+        "url": "https://github.com/S1lverElixir/ponytail.git",
         "ref": "main"
       },
       "policy": {
