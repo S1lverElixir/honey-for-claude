@@ -28,6 +28,7 @@
   <a href="#the-14-skills">Skills</a> &middot;
   <a href="#eson">ESON</a> &middot;
   <a href="#numbers">Numbers</a> &middot;
+  <a href="#faq">FAQ</a> &middot;
   <a href="#how-this-differs-from-upstream">Differences</a>
 </p>
 
@@ -303,6 +304,38 @@ model, so this is the ceiling, not a tuning gap.
 The honest conclusion from upstream: **the prompt is the wrong target.** Real input volume
 in agentic coding is tool output — CCR's domain — and re-pasted context across turns, not
 human pleasantries. It ships as a filter you can reach for, never wired always-on.
+
+---
+
+## FAQ
+
+**Do I have to type `/honey` every session?**
+No. In Cowork the `SessionStart` hook re-activates your last intensity until you run
+`/honey off`. Plain chat has no hooks, so invoke the skill when you want it.
+
+**Can I use it with Caveman, Ponytail or Superpowers?**
+Yes - they solve different halves. Ponytail cuts code, Caveman cuts prose, Honey does both
+plus agent-to-agent handoffs. `/honey-superpowers` stacks the levers onto Superpowers-style
+subagent workflows instead of fighting them.
+
+**Does it make the agent cut corners on security?**
+No, and the skill text enforces it. Input validation at trust boundaries, error handling
+that prevents data loss, auth and secrets, accessibility basics, and anything you asked for
+are listed as never-simplify. In handoffs, auth/money/migrations/deletes stay explicit.
+
+**I only use claude.ai in the browser, no Cowork. Is it worth it?**
+Yes - all 14 skills work in plain chat. You lose hooks, subagents, and the two skills that
+shell out (`/honey-gain`, `/honey-eco`). For the prose core with no plugin at all, paste
+[`skills/honey-chat/SKILL.md`](skills/honey-chat/SKILL.md) into a Project or Style.
+
+**Why does quality say "tie" instead of "better"?**
+Because that is what the benchmark shows: judge 94 +/-7 baseline vs 93 +/-6 honey, inside
+the noise. Claiming a quality win off that would be dishonest; the win is token volume.
+
+**Is this a fork? Will it drift from upstream?**
+Not a fork - a repackage. Skill and agent bodies are byte-identical and the version stays
+pinned to upstream's `1.3.1`, so you can always diff the two. Upstream's per-platform rule
+generators and their outputs are removed here, since this repo targets one platform.
 
 ---
 
