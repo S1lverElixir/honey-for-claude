@@ -72,8 +72,8 @@ single-call bench (`src/run.js`) structurally cannot.
   exactly — 94 vs 94 — while the sign test shows it losing 16 of 23 tasks, p=0.004.)
 - **`(ns)` is printed on any delta that misses p<0.05.** A tie gets called a tie.
 
-Implementation: [`src/paired.js`](src/paired.js), unit-tested in
-[`../tests/paired.test.js`](../tests/paired.test.js) against exact enumeration.
+Implementation: `src/paired.js`, unit-tested in
+`../tests/paired.test.js` against exact enumeration.
 
 ## Run ladder
 
@@ -216,7 +216,7 @@ Carried from [README](README.md#honest-limits), plus what this document adds:
   every recorded `cache_read` is 0, so every task pays the prompt fresh: Δ new-input
   **+573%** and Δcost **+14% (ns)** despite Δoutput of −20% (p=0.004).
   The harness maps OpenAI's `input_tokens_details.cached_tokens` correctly
-  ([`src/client.js:112`](src/client.js:112)), so the zero is what the API reported, not a
+  (`src/client.js:112`), so the zero is what the API reported, not a
   recording bug — but *why* automatic caching never engaged across 23 tasks × 3 runs
   sharing one system prefix is **unresolved**. Until it is, the gpt-5.5 cost delta is
   evidence of neither a saving nor a penalty; the output delta stands on its own.

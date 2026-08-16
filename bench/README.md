@@ -5,8 +5,8 @@ A **reproducible** benchmark comparing skill configurations on real coding tasks
 | Variant | System prompt |
 |---------|---------------|
 | `baseline` | none (control) |
-| `caveman` | [Caveman](https://github.com/JuliusBrussee/caveman) `SKILL.md` (pinned in [`variants/caveman.md`](variants/caveman.md)) |
-| `ponytail` | [Ponytail](https://github.com/DietrichGebert/ponytail) `AGENTS.md` (pinned in [`variants/ponytail.md`](variants/ponytail.md)) |
+| `caveman` | [Caveman](https://github.com/JuliusBrussee/caveman) `SKILL.md` (pinned in `variants/caveman.md`) |
+| `ponytail` | [Ponytail](https://github.com/DietrichGebert/ponytail) `AGENTS.md` (pinned in `variants/ponytail.md`) |
 | `honey` | this repo's [`skills/honey/SKILL.md`](../skills/honey/SKILL.md) (loaded live, no copy to drift) |
 | `honey-design` | the web-only satellite [`skills/honey-design/SKILL.md`](../skills/honey-design/SKILL.md) — opt-in, only meaningful on `web` tasks |
 
@@ -26,7 +26,7 @@ Per task × variant × run:
 1. **Objective correctness** — the code block is extracted from the reply, written to disk,
    and run against a real unit test (`tasks/<id>/test.{py,js}`). Pass = exit 0. No vibes.
 2. **Quality** — an LLM judge scores the reply 0–100 on correctness/completeness/clarity
-   (see [`src/judge.js`](src/judge.js)). The default rubric (`JUDGE_RUBRIC=plain`) is
+   (see `src/judge.js`). The default rubric (`JUDGE_RUBRIC=plain`) is
    **neutral**: it says *nothing* about length or terseness in either direction, so a terse
    skill gets no thumb on the scale; the only guardrails are correctness-neutral and apply to
    every variant. (`JUDGE_RUBRIC=aware` is the older terseness-tolerant rubric, kept so the two
@@ -344,7 +344,7 @@ four). That is worth stating because the 2026 prompting guidance predicted the o
 see [`METHODOLOGY.md`](METHODOLOGY.md#lean-prompt-ablation).
 
 `honey-lean` is the tested-and-rejected 781-token ablation
-([`variants/honey-lean.md`](variants/honey-lean.md)): it buys 8 points of cost with 21
+(`variants/honey-lean.md`): it buys 8 points of cost with 21
 points of LOC and three test cells — **a cheaper prompt, not a better one.** It is opt-in
 and kept only so the negative result stays reproducible.
 
