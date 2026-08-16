@@ -1,26 +1,19 @@
-# Secrets, never commit API keys
-.env
-.env.*
-!.env.example
-
-# Dependencies
+# Node
 node_modules/
-
-# promptfoo eval artifacts
-.promptfoo/
-benchmarks/output*
-benchmarks/benchmark-local-results.json
+npm-debug.log*
 
 # Python
 __pycache__/
+*.pyc
 
-# one-off social/announcement art, not repo content
-announce-*.png
-changelog-*.png
-ponytail-*.gif
+# Local Honey state (runtime, not source)
+.honey-active
 
-# Claude Code local settings (machine-specific permission grants)
+# CCR runtime cache
+.honey-ccr/
+
+# Local editor/claude settings
 .claude/settings.local.json
 
-# agentic benchmark workspaces (agent output, kept locally for inspection)
-benchmarks/agentic/runs/
+# OS
+.DS_Store
