@@ -1,26 +1,23 @@
-# Secrets, never commit API keys
-.env
-.env.*
-!.env.example
+# Benchmark workspace — kept local, never published
+benchmark/
 
-# Dependencies
+# macOS
+.DS_Store
+
+# Node
 node_modules/
+npm-debug.log*
+yarn-error.log*
 
-# promptfoo eval artifacts
-.promptfoo/
-benchmarks/output*
-benchmarks/benchmark-local-results.json
+# Local Honey state (created at runtime, not source)
+.honey-active
 
-# Python
+# Python bytecode
 __pycache__/
+*.pyc
 
-# one-off social/announcement art, not repo content
-announce-*.png
-changelog-*.png
-ponytail-*.gif
+# CCR runtime cache
+.honey-ccr/
 
-# Claude Code local settings (machine-specific permission grants)
-.claude/settings.local.json
-
-# agentic benchmark workspaces (agent output, kept locally for inspection)
-benchmarks/agentic/runs/
+# Cline harness-bench logs (raw run output; results.json under bench/results/ is kept)
+bench/results_cline*.log
