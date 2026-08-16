@@ -6,10 +6,15 @@
     "name": "Green-PT",
     "url": "https://github.com/Green-PT"
   },
-  "homepage": "https://github.com/S1lverElixir/honey",
-  "repository": "https://github.com/S1lverElixir/honey",
+  "homepage": "https://github.com/S1lverElixir/honey-for-claude",
+  "repository": "https://github.com/S1lverElixir/honey-for-claude",
   "license": "MIT",
-  "keywords": ["tokens", "yagni", "minimalism", "productivity"],
+  "keywords": [
+    "tokens",
+    "yagni",
+    "minimalism",
+    "productivity"
+  ],
   "skills": "skills/",
   "hooks": "hooks/claude-codex-hooks.json"
 }

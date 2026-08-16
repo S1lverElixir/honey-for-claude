@@ -1,4 +1,4 @@
-<h1 align="center">Honey for the Claude app</h1>
+<h1 align="center">Honey for Claude</h1>
 
 <p align="center">
   <em>Write less code. Say less about it.</em>
@@ -16,6 +16,7 @@
   <a href="#install">Install</a> ·
   <a href="#what-runs-where">What runs where</a> ·
   <a href="#skills">Skills</a> ·
+  <a href="#eson">ESON</a> ·
   <a href="#numbers">Numbers</a> ·
   <a href="#how-this-differs-from-upstream">Differences</a>
 </p>
@@ -35,6 +36,32 @@ files verified byte-identical against upstream.
 
 Using Claude Code in a terminal? Install upstream. It works there and covers every other
 platform besides.
+
+---
+
+## Why
+
+Agents are paid by the token, and most tokens are waste. Not wrong output — *surplus*
+output. A helper class where a one-liner would do. Three paragraphs explaining code that
+reads fine on its own. A tool result pasted in full when a summary and a hash would carry
+the same meaning.
+
+Honey attacks that surplus on three independent levers:
+
+1. **Less code.** Walk the ladder, stop at the first rung that holds — does it need to
+   exist → is it already in the repo → stdlib → language native → existing dependency →
+   one line → minimum block.
+2. **Less prose.** No wind-up, no hedging, no narrating code that already reads clearly.
+   Answer first.
+3. **Denser agent-to-agent handoffs.** When the reader is a program, hand it the most
+   token-efficient format it parses losslessly.
+
+It isn't a mode you invoke. It's a writing style the agent applies reflexively, so it costs
+no reasoning tokens to decide whether to apply it.
+
+Intensity: `lite` keeps the explanation, `full` is the default, `ultra` is answer-only.
+Never simplified away: input validation, error handling, auth, accessibility, and anything
+you explicitly asked for.
 
 ---
 
@@ -59,7 +86,7 @@ One line, one `honey:` marker naming the shortcut, no essay attached.
 **Settings → Plugins → `+` → Add marketplace**
 
 ```
-S1lverElixir/honey
+S1lverElixir/honey-for-claude
 ```
 
 Then **Sync → Install**.
@@ -81,25 +108,6 @@ Verify: type `/` in a chat. Fourteen `honey-*` commands should appear.
 
 Hooks and subagents grey out in plain chat. That's an Anthropic platform limit, not a
 packaging bug. Every skill works everywhere, including the full `honey` core.
-
----
-
-## How it works
-
-Honey isn't a mode you invoke. It's a writing style the agent applies reflexively, on
-three independent levers:
-
-1. **Less code.** Walk the ladder, stop at the first rung that holds — does it need to
-   exist → is it already in the repo → stdlib → language native → existing dependency →
-   one line → minimum block.
-2. **Less prose.** No wind-up, no hedging, no narrating code that already reads clearly.
-   Answer first.
-3. **Denser agent-to-agent handoffs.** When the reader is a program, hand it the most
-   token-efficient format it parses losslessly.
-
-Intensity: `lite` keeps the explanation, `full` is the default, `ultra` is answer-only.
-Never simplified away: input validation, error handling, auth, accessibility, and anything
-you explicitly asked for.
 
 ---
 
@@ -169,6 +177,33 @@ a local cache, leaves a hash you can expand.
 
 ---
 
+## Input precompression
+
+The three levers cut **output**. There is symmetric waste on the **input** side — filler,
+pleasantries, sentences the prompt repeats to itself.
+
+[`hooks/precompress.js`](hooks/precompress.js) is a deterministic, **no-model** compressor
+that strips them before the prompt reaches the LLM. Code, paths, URLs, double-quoted
+strings and numbers pass through verbatim — it never touches a token you'd need exact.
+
+```bash
+printf '%s' 'Hi! Could you please write a function `add(a, b)` that returns their sum? Thanks so much in advance!' \
+  | node hooks/precompress-cli.js
+# write a function `add(a, b)` that returns their sum? in advance!
+```
+
+Upstream keeps this as a **measured negative result**, and so do I. On a hand-written
+verbose corpus it cuts −16.5% median. On **266 real prompts from 35 actual sessions** it
+cuts 2.5% total, median 0% — 219 of those 266 compress to nothing, because real prompts are
+already terse. Deterministic compression can't catch *reworded* restatement; that needs a
+model, so this is the ceiling, not a tuning gap.
+
+The honest conclusion from upstream: **the prompt is the wrong target.** Real input volume
+in agentic coding is tool output — CCR's domain — and re-pasted context across turns, not
+human pleasantries. It ships as a CLI filter you can reach for, never wired always-on.
+
+---
+
 ## Subagents and hooks
 
 Cowork only.
@@ -185,8 +220,30 @@ Cowork only.
 | `SubagentStart` | Injects the Honey directive into every spawned subagent |
 | `PostToolUse` | Compresses bulky Bash output before it reaches context |
 
-Also bundled: [`hooks/statusline.js`](hooks/statusline.js), a 🍯 badge with live CO₂, and
-[`bin/usage.js`](bin/usage.js), actual token spend across your coding agents.
+### Carbon badge
+
+[`hooks/statusline.js`](hooks/statusline.js) renders a 🍯 badge with a live CO₂ estimate for
+the session and the CO₂/$ saved against a no-Honey baseline. The numbers come from the
+committed EcoLogits port in [`hooks/eco.js`](hooks/eco.js) — no network, no API key.
+
+The saved figure is a **modelled counterfactual**, not a measurement, and it always carries
+the bench stamp it came from. `/honey-eco` expands the badge into a full breakdown.
+
+### honey-usage
+
+[`bin/usage.js`](bin/usage.js) reads the session data your coding agents already write to
+disk and reports **actual** token usage — tokens, approximate USD, served CO₂ — per app and
+model. Zero dependencies, no network, nothing leaves your machine.
+
+| App | Source |
+|---|---|
+| `claude` (Claude Code) | `$CLAUDE_CONFIG_DIR` or `~/.claude` — `projects/**/*.jsonl` |
+| `codex` (Codex CLI) | `$CODEX_HOME` or `~/.codex` — `sessions/**/*.jsonl` |
+| `opencode` | `($XDG_DATA_HOME` or `~/.local/share)/opencode/opencode.db` |
+
+```bash
+node bin/usage.js
+```
 
 ---
 
@@ -202,9 +259,9 @@ From [`bench/results/combined.md`](bench/results/combined.md) — 23 tasks, `cla
 
 On self-contained code tasks the gap widens to **−49%** — 8,126 tokens against 15,996.
 
-The authors' own caveat, kept here verbatim in spirit: **quality is a tie, not a gain.**
-Token savings are real; a quality improvement is not claimed. Every figure is a paired
-per-task median with a p-value, and `(ns)` results are ties, not wins. Method:
+The authors' own caveat, kept here: **quality is a tie, not a gain.** Token savings are
+real; a quality improvement is not claimed. Every figure is a paired per-task median with a
+p-value, and `(ns)` results are ties, not wins. Method:
 [`bench/METHODOLOGY.md`](bench/METHODOLOGY.md).
 
 ---
