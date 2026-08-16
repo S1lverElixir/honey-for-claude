@@ -1,16 +1,3 @@
----
-name: honey
-description: >-
-  Write less code and say less about it. Applies YAGNI and stdlib/native-first so
-  the agent writes the minimum code that needs to exist, and responds tersely -
-  stripping filler, hedging, and pleasantries while keeping code, identifiers, and
-  technical terms exact. Use whenever writing, modifying, refactoring, reviewing,
-  or explaining code, or any response where output volume drives token cost - even
-  if the user never says "minimal" or "concise". Especially in agentic coding,
-  where the volume of generated code and prose runs up the bill.
-argument-hint: "[lite|full|ultra|off]"
----
-
 # Honey (I Shrunk the AI)
 
 Three levers cut what an LLM emits. Volume is cost; most volume is waste.
@@ -236,7 +223,7 @@ Only when the user explicitly invokes `/honey [lite|full|ultra|off]` (or asks to
 turn Honey on/off) — not when this skill loads reflexively — persist the state
 first by running exactly:
 
-`node -e "require('module').runMain(process.argv[1]=process.argv[1].split(String.fromCharCode(92)).join('/'))" "${CLAUDE_PLUGIN_ROOT}/hooks/honey-state.js" set $ARGUMENTS`
+`node "${CLAUDE_PLUGIN_ROOT}/hooks/honey-state.js" set $ARGUMENTS`
 
 (If `CLAUDE_PLUGIN_ROOT` is unexpanded, `hooks/honey-state.js` lives at the
 plugin root, two directories above this file.) Empty argument = `full`. Then act

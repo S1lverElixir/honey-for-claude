@@ -1,18 +1,3 @@
----
-name: honey-design
-description: >-
-  Same pixels, fewer tokens - for user-facing deliverables where visual polish is
-  the spec. Use when building or editing a landing page, marketing site, hero,
-  pricing/feature section, dashboard, or any HTML/CSS UI component. Keeps the full
-  rendered design (layout depth, hierarchy, motion, responsive richness, a11y) and
-  cuts tokens by expressing that design densely - CSS custom properties, shared
-  classes, shorthand, fluid units - instead of by cutting the design. The honey
-  core trims code and prose; this trims how the design is *written*, never how it
-  looks. Reach for it whenever output is user-facing markup, even if the user never
-  says "minimal".
-argument-hint: "[the user-facing thing to build]"
----
-
 # Honey Design (same pixels, fewer tokens)
 
 For user-facing deliverables — landing pages, marketing sites, UI components —
