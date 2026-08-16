@@ -1,24 +1,56 @@
-# Honey for the Claude app
+<h1 align="center">Honey for the Claude app</h1>
 
-**Honey (I Shrunk the AI)**, repackaged so it installs as a marketplace in the
-**Claude app** — web, desktop, mobile and Cowork.
+<p align="center">
+  <em>Write less code. Say less about it.</em>
+</p>
 
-Upstream: [Green-PT/honey-for-devs](https://github.com/Green-PT/honey-for-devs) · Author: **Green-PT** · MIT
+<p align="center">
+  <img src="https://img.shields.io/badge/skills-14-111111?style=flat-square" alt="14 skills">
+  <img src="https://img.shields.io/badge/subagents-3-111111?style=flat-square" alt="3 subagents">
+  <img src="https://img.shields.io/badge/hooks-3-111111?style=flat-square" alt="3 hooks">
+  <img src="https://img.shields.io/badge/output%20tokens-−15%25-111111?style=flat-square" alt="minus 15 percent output tokens">
+  <img src="https://img.shields.io/badge/license-MIT-111111?style=flat-square" alt="MIT license">
+</p>
+
+<p align="center">
+  <a href="#install">Install</a> ·
+  <a href="#what-runs-where">What runs where</a> ·
+  <a href="#skills">Skills</a> ·
+  <a href="#numbers">Numbers</a> ·
+  <a href="#how-this-differs-from-upstream">Differences</a>
+</p>
 
 ---
 
-## Why this fork exists
+**[Honey (I Shrunk the AI)](https://github.com/Green-PT/honey-for-devs)** by
+[Green-PT](https://github.com/Green-PT), repackaged so it installs as a marketplace in the
+Claude app — web, desktop, mobile and Cowork.
 
-The upstream repository does not add as a marketplace in the Claude app. The app reads
-`.agents/plugins/marketplace.json`, which pointed at a directory containing only the
-Codex build — no plugin manifest, no agents, no hooks.
+Upstream doesn't add there. The app reads `.agents/plugins/marketplace.json`, and upstream's
+copy points at a directory holding only the Codex build: no plugin manifest, no agents, no
+hooks. This repo fixes the packaging and nothing else.
 
-This repo fixes the packaging. **Skill and agent content is unchanged** — verified
-byte-for-byte against upstream (14/14 skill bodies identical, 3/3 agents identical,
-16 code files identical).
+Skill and agent content is unchanged — 14/14 skill bodies, 3/3 agent bodies and 16 code
+files verified byte-identical against upstream.
 
-Using **Claude Code** in a terminal? Install upstream instead — it works there and
-supports every other platform too.
+Using Claude Code in a terminal? Install upstream. It works there and covers every other
+platform besides.
+
+---
+
+## Before / after
+
+You ask for a debounce helper. Your agent writes a class, adds a config object, wires up
+cancel/flush methods, and explains the event loop.
+
+With Honey:
+
+```js
+// honey: setTimeout is the debounce
+const debounce = (fn, ms) => (...a) => (clearTimeout(fn.t), fn.t = setTimeout(() => fn(...a), ms));
+```
+
+One line, one `honey:` marker naming the shortcut, no essay attached.
 
 ---
 
@@ -30,42 +62,44 @@ supports every other platform too.
 S1lverElixir/honey
 ```
 
-→ **Sync** → **Install**
+Then **Sync → Install**.
 
-Already added a marketplace named `honey`? Remove it first (⋮ → Remove), or the app
-serves a cached copy.
+Already added a marketplace named `honey`? Remove it first (⋮ → Remove) or the app serves
+you a cached copy.
 
-Verify: type `/` in a chat — 14 `honey-*` commands should appear.
+Verify: type `/` in a chat. Fourteen `honey-*` commands should appear.
 
 ---
 
 ## What runs where
 
-| | Chat (web / desktop / mobile) | Cowork |
+| | Chat — web, desktop, mobile | Cowork |
 |---|:---:|:---:|
 | 14 skills | ✅ | ✅ |
-| 3 subagents | ▫️ | ✅ |
-| 3 hooks | ▫️ | ✅ |
+| 3 subagents | — | ✅ |
+| 3 hooks | — | ✅ |
 
-Hooks and subagents are greyed out in plain chat — that is an Anthropic platform limit,
-not a packaging problem. Every skill, including the full `honey` core, works everywhere.
+Hooks and subagents grey out in plain chat. That's an Anthropic platform limit, not a
+packaging bug. Every skill works everywhere, including the full `honey` core.
 
 ---
 
-## The three levers
+## How it works
 
-Honey is not a mode you invoke. It is a writing style the agent applies reflexively.
+Honey isn't a mode you invoke. It's a writing style the agent applies reflexively, on
+three independent levers:
 
-1. **Less code** — most code needn't exist. Walk the ladder and stop at the first rung
-   that works: does it need to exist → is it already in the repo → stdlib → language
-   native → existing dependency → one line → minimum block.
-2. **Less prose** — no wind-up, no hedging, no narrating readable code. Answer first.
-3. **Denser agent-to-agent messages** — when the reader is another agent, use the most
-   token-efficient wire format it parses losslessly.
+1. **Less code.** Walk the ladder, stop at the first rung that holds — does it need to
+   exist → is it already in the repo → stdlib → language native → existing dependency →
+   one line → minimum block.
+2. **Less prose.** No wind-up, no hedging, no narrating code that already reads clearly.
+   Answer first.
+3. **Denser agent-to-agent handoffs.** When the reader is a program, hand it the most
+   token-efficient format it parses losslessly.
 
-Intensity: `lite` keeps explanations, `full` is the default, `ultra` is answer-only.
-Safety-critical paths — input validation, error handling, auth, accessibility — are
-never simplified away.
+Intensity: `lite` keeps the explanation, `full` is the default, `ultra` is answer-only.
+Never simplified away: input validation, error handling, auth, accessibility, and anything
+you explicitly asked for.
 
 ---
 
@@ -83,8 +117,8 @@ never simplified away.
 | Command | What it does |
 |---|---|
 | `/honey-review` | Reviews a diff for what Honey would cut: speculative generality, hand-rolled stdlib, single-caller abstractions, dead code |
-| `/honey-debt` | Harvests every `honey:` comment into a ledger, so deliberate shortcuts get tracked instead of rotting |
-| `/honey-design` | Same pixels, fewer tokens. For landing pages and UI, where polish *is* the spec — trims how the design is written, never how it looks |
+| `/honey-debt` | Harvests every `honey:` comment into a ledger, so deliberate shortcuts get tracked instead of quietly going permanent |
+| `/honey-design` | Same pixels, fewer tokens. For landing pages and UI where polish *is* the spec — trims how the design is written, never how it looks |
 | `/honey-memory` | Sets up a committed `PROJECT.md` so agents stop rediscovering the same facts every cold session |
 | `/honey-compress` | Rewrites `CLAUDE.md`-style context files tersely, cutting input tokens every session |
 
@@ -92,40 +126,52 @@ never simplified away.
 
 | Command | What it does |
 |---|---|
-| `/honey-ccr` | **Compress-Cache-Retrieve** for huge repetitive arrays (logs, scans, time series). Keeps an informative sample, caches the rest behind a retrievable hash |
-| `/honey-px` | Reads dense read-only text as rendered PNG pages — image tokens scale with pixels, not characters. Lossy on exact strings, never for files you'll edit |
+| `/honey-ccr` | Compress-Cache-Retrieve for huge repetitive arrays — logs, scans, time series. Keeps an informative sample, caches the rest behind a retrievable hash |
+| `/honey-px` | Reads dense read-only text as rendered PNG pages; image tokens scale with pixels, not characters. Lossy on exact strings — never for files you'll edit |
 | `/honey-loop` | Cost discipline for recurring `/loop` runs, where waste multiplies by iteration count |
 
-### Orchestration & reporting
+### Orchestration and reporting
 
 | Command | What it does |
 |---|---|
 | `/honey-hive` | When to delegate to read-only subagents instead of working inline |
 | `/honey-superpowers` | Stacks Honey onto Superpowers-style workflows so dispatched subagents inherit the levers |
 | `/honey-gain` | Reports the committed benchmark scoreboard from `bench/` |
-| `/honey-eco` | Session output tokens and CO₂ via the committed EcoLogits port (needs shell — Cowork only) |
+| `/honey-eco` | Session output tokens and CO₂ via the committed EcoLogits port — needs shell, so Cowork only |
 
 ---
 
-## ESON — Efficient Structured Object Notation
+## ESON
 
-A wire format for agent-to-agent payloads. Same data, fewer tokens:
+A wire format for agent-to-agent payloads. Repeated record keys are emitted once, declared
+row counts catch truncated messages, JSON-compatible cells keep their types.
 
-```
-JSON   {"rows":[{"id":1,"name":"alpha","v":10},{"id":2,"name":"beta","v":20}]}
-ESON   42% smaller, round-trips losslessly
-```
+Measured against compact JSON across five handoff documents, `o200k` tokenizer:
+
+| Format | Valid JSON? | vs compact JSON |
+|---|:--:|---:|
+| JSON (pretty) — the unprompted default | yes | **+55%** |
+| JSON (compact) | yes | 0% |
+| TOON | no | −20% |
+| JSON (columnar) | yes | −22% |
+| **ESON** | no | **−28%** |
+
+Comprehension ties JSON at 100% on key-lookup, column-match, nested-cell and nested-array
+access. Positional access and in-context counting fail across *all* formats — a model
+limit, not ESON's.
 
 Spec: [`eso/SPEC.md`](eso/SPEC.md) · Codec: [`eso/index.js`](eso/index.js) ·
 CLI: `node bin/eso.js encode|decode|crush`
 
-**CCR** ([`eso/ccr.js`](eso/ccr.js)) handles the other case — arrays too big to read but
-too uniform to matter. It keeps endpoints, anomalies and head/tail, drops the redundant
-middle to a local cache, and leaves a hash you can expand.
+**CCR** ([`eso/ccr.js`](eso/ccr.js)) covers the other case: arrays too big to read, too
+uniform to matter. Keeps endpoints, anomalies and head/tail, drops the redundant middle to
+a local cache, leaves a hash you can expand.
 
 ---
 
-## Subagents & hooks (Cowork)
+## Subagents and hooks
+
+Cowork only.
 
 | Subagent | Role |
 |---|---|
@@ -135,29 +181,31 @@ middle to a local cache, and leaves a hash you can expand.
 
 | Hook | Fires |
 |---|---|
-| `SessionStart` | Re-activates Honey each session until you turn it off |
+| `SessionStart` | Re-activates Honey each session until you switch it off |
 | `SubagentStart` | Injects the Honey directive into every spawned subagent |
-| `PostToolUse` | Compresses bulky Bash output before it enters context |
+| `PostToolUse` | Compresses bulky Bash output before it reaches context |
 
-Also included: [`hooks/statusline.js`](hooks/statusline.js) — a 🍯 badge with live CO₂,
-and [`bin/usage.js`](bin/usage.js) — actual token usage across your coding agents.
+Also bundled: [`hooks/statusline.js`](hooks/statusline.js), a 🍯 badge with live CO₂, and
+[`bin/usage.js`](bin/usage.js), actual token spend across your coding agents.
 
 ---
 
 ## Numbers
 
-From [`bench/results/combined.md`](bench/results/combined.md) — 23 tasks, `claude-opus-4-8`:
+From [`bench/results/combined.md`](bench/results/combined.md) — 23 tasks, `claude-opus-4-8`,
+345 generations.
 
-| Variant | Tests pass | Judge | Output tokens |
+| Variant | Tests pass | Judge ±sd | Output tokens |
 |---|---|---|---|
-| baseline | 97% | 94 | 90,795 |
-| **honey** | **100%** | 93 | **77,098 (−15%)** |
+| baseline | 97% | 94 ±7 | 90,795 |
+| **honey** | **100%** | 93 ±6 | **77,098 · −15%** |
 
-On self-contained code tasks the gap widens to **−49%** (8,126 vs 15,996 tokens).
+On self-contained code tasks the gap widens to **−49%** — 8,126 tokens against 15,996.
 
-The authors' own caveat, kept here: **quality is a tie, not a gain.** The token savings
-are real; a quality improvement is not claimed. Every figure is a paired per-task median
-with a p-value — see [`bench/METHODOLOGY.md`](bench/METHODOLOGY.md).
+The authors' own caveat, kept here verbatim in spirit: **quality is a tie, not a gain.**
+Token savings are real; a quality improvement is not claimed. Every figure is a paired
+per-task median with a p-value, and `(ns)` results are ties, not wins. Method:
+[`bench/METHODOLOGY.md`](bench/METHODOLOGY.md).
 
 ---
 
@@ -165,34 +213,37 @@ with a p-value — see [`bench/METHODOLOGY.md`](bench/METHODOLOGY.md).
 
 | | Upstream | Here |
 |---|---|---|
-| Skills | 14 | 14, **bodies byte-identical** |
-| Subagents | 3 | 3, **bodies byte-identical** |
-| Code (hooks, ESON, bin) | — | **16 files byte-identical** |
-| Version | 1.3.1 | **1.3.1**, kept in sync |
-| Cursor / Windsurf / Cline / Kiro / Hermes / OpenClaw / Codex files | yes | removed |
+| Skills | 14 | 14 — bodies byte-identical |
+| Subagents | 3 | 3 — bodies byte-identical |
+| Code: hooks, ESON, bin | — | 16 files byte-identical |
+| Version | 1.3.1 | 1.3.1, kept in sync |
+| Cursor · Windsurf · Cline · Kiro · Hermes · OpenClaw · Codex | yes | removed |
 | CI workflows, test suite, npm manifest | yes | removed |
 
-Only skill frontmatter was touched: characters the Claude.ai marketplace validator
-rejects (emoji, `≤`, em dashes) were replaced with ASCII. Instruction text is untouched.
+Only skill frontmatter changed: characters the Claude.ai marketplace validator rejects —
+emoji, `≤`, em dashes — replaced with ASCII. Instruction text untouched.
 
-Need Cursor, Gemini CLI, Hermes or the one-line installer?
-[Upstream](https://github.com/Green-PT/honey-for-devs) has all of it.
+Want Cursor, Gemini CLI, Hermes or the one-line installer?
+[Upstream](https://github.com/Green-PT/honey-for-devs) ships all of it.
 
 ---
 
 ## Updating
 
-The version deliberately tracks upstream (`1.3.1`) rather than bumping on every change,
-so the app may not auto-refresh. Force it with **Settings → Plugins → Honey → ⋮ → Update**.
+The version deliberately tracks upstream (`1.3.1`) instead of bumping on every change, so
+the app may not refresh on its own. Force it: **Settings → Plugins → Honey → ⋮ → Update**.
 
 ---
 
-## Credits
+## License
 
-All substance is the work of **[Green-PT](https://github.com/Green-PT)**. This repo only
-re-lays-out the packaging. If it's useful, star
+MIT, same as upstream. See [`LICENSE`](LICENSE) and [`NOTICE`](NOTICE).
+
+Every idea, skill and benchmark here is
+**[Green-PT](https://github.com/Green-PT)**'s work. This repo only rearranges the packaging.
+If Honey earns its place in your setup, star
 [the original](https://github.com/Green-PT/honey-for-devs).
 
 The benchmarks compare Honey against
 [Ponytail](https://github.com/DietrichGebert/ponytail) and
-[Caveman](https://github.com/JuliusBrussee/caveman) — both worth a look.
+[Caveman](https://github.com/JuliusBrussee/caveman). Both are worth your time.
