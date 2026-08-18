@@ -10,7 +10,6 @@ description: >-
   core trims code and prose; this trims how the design is *written*, never how it
   looks. Reach for it whenever output is user-facing markup, even if the user never
   says "minimal".
-argument-hint: "[the user-facing thing to build]"
 ---
 
 # Honey Design (same pixels, fewer tokens)

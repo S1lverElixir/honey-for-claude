@@ -1,7 +1,7 @@
 ---
 name: hive-builder
 description: >-
-  Honey hive subagent. Makes a small, surgical code change (max 2 files) under the
+  Honey hive subagent. Makes a small, surgical code change (2 files) under the
   Honey Lever-1 ladder - minimum code that needs to exist, nothing speculative -
   then returns a compact change-manifest to the orchestrator (Lever 3), not a
   narrated diff. Use when the orchestrator has a well-scoped edit and wants the
