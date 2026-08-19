@@ -1,0 +1,21 @@
+<svg viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Honey for Claude logo: a honeycomb cell shrinking inward">
+  <title>Honey for Claude</title>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f0c14b"/>
+      <stop offset="1" stop-color="#d9a441"/>
+    </linearGradient>
+  </defs>
+
+  <!-- outer hex: the bloated default -->
+  <polygon points="120,16 210,68 210,172 120,224 30,172 30,68"
+           fill="none" stroke="#8b949e" stroke-width="6" stroke-linejoin="round" opacity="0.42"/>
+
+  <!-- middle hex -->
+  <polygon points="120,52 179,86 179,154 120,188 61,154 61,86"
+           fill="none" stroke="#d9a441" stroke-width="6" stroke-linejoin="round" opacity="0.72"/>
+
+  <!-- inner hex: what honey ships -->
+  <polygon points="120,88 148,104 148,136 120,152 92,136 92,104"
+           fill="url(#g)" stroke="#d9a441" stroke-width="4" stroke-linejoin="round"/>
+</svg>

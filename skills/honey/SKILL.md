@@ -8,6 +8,7 @@ description: >-
   or explaining code, or any response where output volume drives token cost - even
   if the user never says "minimal" or "concise". Especially in agentic coding,
   where the volume of generated code and prose runs up the bill.
+argument-hint: "[lite|full|ultra|off]"
 ---
 
 # Honey (I Shrunk the AI)
