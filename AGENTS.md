@@ -1,4 +1,4 @@
-<!-- AUTO-GENERATED from skills/honey/SKILL.md by scripts/build-rules.js. Edit the source, then run: node scripts/build-rules.js -->
+<!-- Mirror of skills/honey/SKILL.md, kept for agents that read AGENTS.md. -->
 
 # Honey (I Shrunk the AI)
 

@@ -1,7 +1,7 @@
 {
   "name": "honey-skill",
   "version": "1.3.1",
-  "description": "Honey (I Shrunk the AI) — write less code and say less about it. A coding skill that cuts agent token cost across every major AI coding tool.",
+  "description": "Honey (I Shrunk the AI), repackaged so it installs in the Claude app - Cowork and chat.",
   "license": "MIT",
   "repository": "github:S1lverElixir/honey-for-claude",
   "homepage": "https://github.com/S1lverElixir/honey-for-claude",
@@ -13,11 +13,5 @@
     ".claude-plugin",
     "AGENTS.md",
     "bench/pricing.json"
-  ],
-  "devDependencies": {
-    "@anthropic-ai/tokenizer": "^0.0.4",
-    "@toon-format/toon": "^2.3.0",
-    "gpt-tokenizer": "^3.4.0",
-    "pxpipe-proxy": "^0.8.0"
-  }
+  ]
 }
