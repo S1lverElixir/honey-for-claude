@@ -225,8 +225,7 @@ access. Positional access and in-context counting fail across *all* formats — 
 limit, not ESON's. Aggregate in code; address records by key.
 
 Spec: [`eso/SPEC.md`](eso/SPEC.md) · Codec: [`eso/index.js`](eso/index.js) ·
-Verdict: [`bench/eso/VERDICT.md`](bench/eso/VERDICT.md) ·
-CLI: `node bin/eso.js encode|decode|crush`
+Verdict: [`bench/eso/VERDICT.md`](bench/eso/VERDICT.md)
 
 **CCR** ([`eso/ccr.js`](eso/ccr.js)) covers the other case: arrays too big to read, too
 uniform to matter. Keeps endpoints, anomalies and head/tail, drops the redundant middle to
@@ -274,15 +273,11 @@ saved      : ~20.25 g CO2eq  (assumes 29% fewer output tokens than a no-Honey ru
 
 ### honey-usage
 
-[`bin/usage.js`](bin/usage.js) reads the session data your coding agents already write to
-disk and reports **actual** token usage — tokens, approximate USD, served CO₂ — per app and
-model. Zero dependencies, no network, nothing leaves your machine.
-
-| App | Source |
-|---|---|
-| `claude` (Claude Code) | `$CLAUDE_CONFIG_DIR` or `~/.claude` — `projects/**/*.jsonl` |
-| `codex` (Codex CLI) | `$CODEX_HOME` or `~/.codex` — `sessions/**/*.jsonl` |
-| `opencode` | `($XDG_DATA_HOME` or `~/.local/share)/opencode/opencode.db` |
+Upstream also ships `bin/usage.js`, a zero-dependency CLI that reports actual token usage
+per app and model from the session data your coding agents already write to disk. It is
+deliberately **not** bundled here: it shells out to `sqlite3` to read OpenCode's database,
+which this repo has no reason to do. Get it from
+[upstream](https://github.com/Green-PT/honey-for-devs) if you want it.
 
 ---
 

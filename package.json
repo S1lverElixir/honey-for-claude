@@ -5,13 +5,7 @@
   "license": "MIT",
   "repository": "github:S1lverElixir/honey-for-claude",
   "homepage": "https://github.com/S1lverElixir/honey-for-claude",
-  "bin": {
-    "eso": "bin/eso.js",
-    "eson": "bin/eso.js",
-    "honey-usage": "bin/usage.js"
-  },
   "files": [
-    "bin",
     "hooks",
     "eso",
     "scripts",
