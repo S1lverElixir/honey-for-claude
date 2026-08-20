@@ -294,7 +294,7 @@ function aggregate(records, keys) {
   const groups = new Map();
   for (const rec of records) {
     if (keys.includes("day")) rec.day = rec.ts ? day(rec.ts) : "unknown";
-    const k = keys.map((f) => rec[f]).join(" ");
+    const k = keys.map((f) => rec[f]).join("\u0000");
     let g = groups.get(k);
     if (!g) {
       g = { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, usd: 0 };
